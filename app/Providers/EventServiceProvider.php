@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Event;
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event to listener mappings for the application.
+     * The event listener mappings for the application.
      *
      * @var array<class-string, array<int, class-string>>
      */
@@ -18,21 +18,22 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\DocumentUploadedEvent' => [
+            'App\Listeners\SendDocumentUploadedNotification',
+        ],
+        'App\Events\PushNotificationEvent' => [
+            'App\Listeners\PushNotificationListener'
+        ],
+
     ];
 
     /**
      * Register any events for your application.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
         //
-    }
-
-    /**
-     * Determine if events and listeners should be automatically discovered.
-     */
-    public function shouldDiscoverEvents(): bool
-    {
-        return false;
     }
 }

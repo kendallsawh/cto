@@ -2,36 +2,43 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\PsipName;
+use App\Models\Division;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
         'name',
-        'username',
         'email',
+        'username',
         'password',
-        'guid',
-        'domain',
+        'divisions_id',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -39,28 +46,63 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
 
     /**
-     * Get the role assignments for the user.
+     * Always encrypt password when it is updated.
+     *
+     * @param $value
+     * @return string
      */
-    public function userRoles(): HasMany
+    public function setPasswordAttribute($value)
     {
-        return $this->hasMany(UserRole::class);
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function division()
+    {
+        return $this->hasOne('App\Models\Division', 'id', 'divisions_id')->first();
+    }
+
+    public function createdByDocTypeDivisions()
+    {
+        return $this->hasMany('App\Models\DocTypeDivision', 'created_by', 'id');
+    }
+
+    public function createdByPsipDocs()
+    {
+        return $this->hasMany('App\Models\PsipDoc', 'created_by', 'id');
+    }
+
+    public function createdByPsipNames()
+    {
+        return $this->hasMany('App\Models\PsipName', 'created_by', 'id');
+    }
+
+    public function getSubscription()
+    {
+        return $this->hasMany('App\Models\PushSubscription', 'user_id', 'id');
     }
 
     /**
-     * The roles that belong to the user.
+     * Get all PsipName records that belong to the same division.
      */
-    public function roles(): BelongsToMany
+    public function psipNames()
     {
-        return $this->belongsToMany(Role::class, 'user_roles');
+        return $this->hasManyThrough(
+            PsipName::class, // The target model you want to access
+            Division::class, // The intermediate model (if you have one, assuming Division is a model that represents the divisions)
+            'id', // Foreign key on the Division table
+            'division_id', // Foreign key on the PsipName table
+            'divisions_id', // Local key on the User table
+            'id' // Local key on the Division table (if Division is a model, otherwise adjust accordingly)
+        );
     }
+
 }

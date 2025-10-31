@@ -1,0 +1,67 @@
+/* Overlay that dims the background */
+.tour-overlay {
+    transition: 0.5s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* After the 18-02-2025 merges this appeared lighter despite no change, previous was 0, 0, 0, 0.5 */
+    z-index: 1000;
+    opacity: 0;
+    
+}
+
+.tour-overlay.fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* After the 18-02-2025 merges this appeared lighter despite no change, previous was 0, 0, 0, 0.5 */
+    z-index: 1000;
+    opacity: 1;
+
+}
+
+/* Tooltip styling */
+.tour-tooltip {
+    transition: 0.5s ease-in-out;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    padding: 15px;
+    max-width: 300px;
+    z-index: 1001;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+  
+}
+
+/* Navigation buttons container */
+.tour-nav {
+    margin-top: 10px;
+    text-align: right;
+}
+
+/* Styling for navigation buttons */
+.tour-nav button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Highlight effect for the tutorial target */
+.tutorial-highlight {
+    transition: 0.5s ease-in-out;
+    position: relative; /* ensure that z-index applies */
+    z-index: 1100;      /* higher than the overlay (1000) and tooltip (1001) */
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.979); /* an orange glow */
+    border: 2px solid #d8d8d8;
+}
+
+/* Prevents page scrolling so tour tooltips are less likely to be offscreen and prevent continuation of the tour */
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}

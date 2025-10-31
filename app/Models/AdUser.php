@@ -15,7 +15,7 @@ use LdapRecord\Laravel\Auth\LdapAuthenticatable;
 
 class AdUser extends Authenticatable implements LdapAuthenticatable
 {
-    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, HasRoles, HasApiTokens;
+    use HasFactory, Notifiable, AuthenticatesWithLdap, HasLdapUser, HasRoles;
 
     /**
      * The database table used by the model.
@@ -27,24 +27,41 @@ class AdUser extends Authenticatable implements LdapAuthenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
         'name',
-        'username',
         'password',
         'email',
-        'guid',
-        'domain',
     ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * Always encrypt password when it is updated.
+     *
+     * @param $value
+     * @return string
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
