@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'admin',
     ],
 
     /*
@@ -37,6 +37,10 @@ return [
 
     'guards' => [
         'web' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+        'adyuser' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
@@ -60,15 +64,31 @@ return [
     */
 
     'providers' => [
-        'users' => [
+
+        'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'users' => [
+            'driver' => 'ldap',
+            'model' => LdapRecord\Models\ActiveDirectory\User::class,
+            'rules' => [],
+            'scopes' => [],
+            'database' => [
+                'model' => App\Models\AdUser::class,
+                'sync_passwords' => true,
+                'sync_attributes' => [
+                    'name' => 'cn',
+                    'username' => 'samaccountname',
+
+                ],
+                'sync_existing' => [
+                    'username' => 'samaccountname',
+                ],
+            ],
+        ],
+
     ],
 
     /*
@@ -91,8 +111,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'admin' => [
+            'provider' => 'admin',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
