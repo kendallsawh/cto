@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $data = array('divisions' => Division::orderBy('division_name','asc')->paginate(25), 'financial_year'=>FinancialYear::first()->year, 'tutorialName' => 'index-page-dataentry');
+        $data = array('tutorialName' => 'index-page-dataentry');
 
         return view('home.index',$data);
     }

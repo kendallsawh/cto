@@ -76,7 +76,7 @@
                     <li><a href="{{ route('posts.index') }}" class="nav-link px-2 text-white">Discussion</a></li>
                     <li><a href="{{ asset('storage/Draft-Estimates-of-Development-Programme-For-the-Financial-Year-2025.pdf') }}" target="_blank" class="nav-link px-2 text-white">Resources</a></li>
 
-                    @role('planning|admin')
+                    @role('Editor|admin')
                         <li class="nav-item dropdown">
                             <button class="btn bg-bookstack-blue dropdown-toggle text-white" type="button" id="planningDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 Agricultural Planning Options

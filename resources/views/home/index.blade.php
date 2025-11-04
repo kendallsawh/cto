@@ -146,220 +146,42 @@
 @endsection
 @section('content')
 @auth
+    @role('Subscriber|admin')
+    @include('home.subscriber')
+    @endrole
 
-    <div class="row">
+    @role('Contributor|admin')
+    @include('home.contributor')
+    @endrole
 
-        <div class="col-lg-2 text-decoration-dull" id="tutorial-sidebar-0-ns">
-
-
-
-            <nav id="book-tree" class="mb-xl" aria-label="Book Navigation">
-                <h5>Your department /division's PSIP</h5>
-
-                <!-- Dummy Entry for Tutorial Overlay -->
-
-                <a href="#" id="hidden-tutorial-sidebar" style="visibility: hidden" class="book entity-list-item  text-decoration-dull tutorial-overlay-sidebar" data-entity-type="book" >
-
-                    <span class="vertical-line text-decoration-dull-blue"></span>
-                    <div class="content">
-                        <h6 class="entity-list-item-name break-text">000</h6>
-                    </div>
-                </a>
-
-                @if(auth()->user()->psipNames->isNotEmpty())
-                    @foreach (auth()->user()->psipNames as $psipName)
+    @role('Author|admin')
+    @include('home.author')
+    @endrole
 
 
-                                <a href="{{ route('psip.show', $psipName->id) }}" class="book entity-list-item  text-decoration-dull" data-entity-type="book" data-entity-id="1" data-bs-toggle="tooltip" title="{{$psipName->psip_name}}. Details: {{$psipName->psipDetailForCurrentYear?$psipName->psipDetailForCurrentYear->details:'None Provided'}}">
-                                    <span class="vertical-line text-decoration-dull-blue"></span>
-                                    <div class="content">
-                                        <h6 class="entity-list-item-name break-text">{{$psipName->code}}</h6>
-                                    </div>
-                                </a>
 
-                    @endforeach
-                @endif
-            </nav>
-        </div>
-        <div class="col-lg-8" style="height: 80vh; overflow-y: auto;">
-            <br>
-            <div class="card text-decoration-dull">
-                <div class="card-body">
-                    <h1 class="card-title">PSIP  Listing - Ordered by Division</h1>
+    @role('Editor|admin')
+    @include('home.editor')
+    @endrole
 
-                    <p class="lead">For financial {{$financial_year}}</p>
-                    <hr>
+    @role('admin')
+    @include('home.admin')
+    @endrole
 
-                    <table class="table  table-hover">
-                        <thead>
-                            <tr>
-
-                                <th>Division Name</th>
-                                <th>PSIP</th>
-                                @role('admin')
-                                <th width="10%" colspan="3">Status</th>
-                                @endrole
-                                @role('planning|ict|contributor')
-                                <th width="3%" colspan="3">Status</th>
-                                @endrole
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Dummy Row for Tutorial Overlay -->
-
-                            <tr id="hidden-tutorial-dataentry" style="visibility: hidden">
-
-                                <td class="fw-normal" style="color:rgb(34, 203, 255);">
-                                    <a href="#" class="text-decoration-dull-blue" style="text-decoration: none; color:rgb(34, 203, 255);" id ="tutorial-dataentry-1">PSIP Tutorial - Training
-                                    </a> <!-- Added this tag to fix the tutorial highlight -->
-                                </td>
-                                <td>
-                                    <ul class="d-flex justify-content-between align-items-start">
-                                        <a href="#" class="text-decoration-dull-blue" style="text-decoration: none; color:rgb(34, 203, 255);" id ="tutorial-dataentry-2">Tutorial PSIP - <strong>000</strong>
-                                        </a>
-
-                                    <span class="badge rounded-pill stacked-badge outline-primary'}}" id ="tutorial-dataentry-3">
-                                        <a href="#" class=" text-decoration-none" >CF</a>
-                                    </span>
-                                    </ul>
-                                </td>
-                                <td >
-                                    <ul class="d-flex">
-                                    <!-- The dummy link can be non-functional -->
-
-                                    <span class="badge rounded-pill stacked-badge outline-warning">
-
-                                    <a href="#" class="text-warning text-decoration-none tutorial-overlay-dataentry" title="This is where you click for Data Entry" id ="tutorial-dataentry-4">
-
-
-                                        Data Entry (dummy)
-                                    </a>
-                                    </span>
-                                    <span class="badge rounded-pill bg-danger" id ="tutorial-dataentry-5">Inactive</span>
-                                    </ul>
-                                </td>
-                            </tr>
-                            @foreach ($divisions as $key => $division)
-                            <!-- {{ $division->psipNames->count() == 0 ? 'table-warning' : '' }} use this to highlight rows -->
-                            <tr class="">
-
-
-                                <td class="fw-normal">{{ $division->division_name }} -
-
-                                </td>
-                                <td>
-                                    @forelse($division->psipNames as $psip)
-                                    <ul class="d-flex justify-content-between align-items-start">
-                                        <a href="{{ route('psip.show', $psip->id) }}" class="text-decoration-dull-blue" style="text-decoration: none">{{$psip->psip_name}} - <strong>{{$psip->code}}</strong>
-                                        </a>
-                                        <span class="badge rounded-pill stacked-badge outline-{{$psip->group->subitem->item->fundType->id==1?'success':'primary'}}"
-                                            data-bs-toggle="tooltip"
-                                            title="PSIP can be either Consolidated Fund or Infrastructure Development Fund">
-                                            <a href="#" class=" text-decoration-none">{{$psip->group->subitem->item->fundType->slug}}</a>
-                                        </span>
-
-                                    </ul>
-                                    @empty
-                                    <ul>No Projects</ul>
-
-                                    @endforelse
-
-                                </td>
-
-                                <td>
-                                    @forelse($division->psipNames as $psip)
-
-
-                                    <ul class="d-flex">
-                                        @role('planning|admin|ict|contributor')
-                                        <span class="badge rounded-pill stacked-badge outline-warning">
-                                            <a href="{{ route('dataentry.create', $psip->id) }}" class="text-warning text-decoration-none" data-bs-toggle="tooltip" title="Redirect to Data Entry form for entering PSIP Activities and Details">Data Entry</a>
-                                        </span>
-                                        @endrole
-                                    <span class="badge rounded-pill bg-{{$psip->status_id==3?'danger':'success'}}" data-bs-toggle="tooltip" title="Psip can be either Active, Completed or Surpressed.">{{$psip->status->status}}</span>
-                                    </ul>
-
-                                    @empty
-                                    @endforelse
-                                </td>
-                                <!-- <td>
-                                    <a class="btn btn-primary btn-sm" href="{{ route('psipupload.edit', $division->id) }}">Edit PSIP</a>
-                                </td> -->
-
-                            </tr>
-                            @endforeach
-                        </tbody>
-
-                    </table>
-
-                    <div class="d-flex">
-                        {!! $divisions->links() !!}
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-lg-2 text-decoration-dull">
-
-                <div class="">
-                    <h5 class="card-title">Key/Legend for Fund Types</h5>
-                    <div class="d-flex flex-column">
-                        <table
-                            class="table table-borderless table-sm">
-                            <tbody>
-                                <tr>
-                                    <td class="">
-                                        <span class="badge rounded-pill stacked-badge outline-primary mb-2">
-                                            <a href="#" class=" text-decoration-none">CF</a>
-                                        </span>
-                                    </td>
-                                    <td class="text-decoration-dull">-Consolidated Fund</td>
-                                </tr>
-                                <tr>
-                                    <td class="">
-                                        <span class="badge rounded-pill stacked-badge outline-success mb-2">
-                                            <a href="#" class="text-success text-decoration-none">IDF</a>
-                                        </span>
-                                    </td>
-                                    <td class="text-decoration-dull">-Infrastructure Development Fund</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <hr>
-                        <h5 class="card-title">Actions</h5>
-                        <a href="{{ route('home.moflisting') }}" id="tutorial-overlay-mof-listing-ns" class="book entity-list-item  text-decoration-dull" data-entity-type="book" data-entity-id="1">
-                            <span class="vertical-line text-decoration-dull-blue"></span>
-                            <div class="content">
-                                <h6 class="entity-list-item-name break-text">Switch to Draft Estimates of Development Programme View</h6>
-                            </div>
-                        </a>
-                        <a href="{{ route('psip.prev_yrs') }}" class="book entity-list-item  text-decoration-dull" data-entity-type="book" data-entity-id="1">
-                            <span class="vertical-line text-decoration-dull-blue"></span>
-                            <div class="content">
-                                <h6 class="entity-list-item-name break-text">View previous years</h6>
-                            </div>
-                        </a>
-                        <!-- Application UI elements -->
-                        <a id="start-tutorial" class="book entity-list-item text-decoration-dull">
-                            <span class="vertical-line text-decoration-dull-blue"></span>
-                            <div class="content">
-                                <h6 class="entity-list-item-name break-text">Start Tour</h6>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-
-        </div>
-
-    </div>
+    <!--
+        Subscriber: Can only manage their own profile. This is the role with the fewest permissions.
+        Contributor: Can write and edit their own posts, but cannot publish them. They have no publishing or uploading capabilities.
+        Author: Can write, upload media, edit, and publish their own posts.
+        Editor: Can publish and manage posts for all users, upload media, and manage categories and tags.
+        Administrator: Has full control over the entire site, including managing users, themes, plugins, settings, and more. They can create other administrators.
+    -->
 
 @endauth
 @guest
 <div class="bg-light p-5 rounded">
 
-    <h1>MALF Public Sector Investment Programme Database</h1>
-    <p class="lead">Please login to view the restricted data.</p>
+    <h1>MALF Conssesions</h1>
+    <p class="lead">Please login to continue.</p>
 
 </div>
 @endguest
