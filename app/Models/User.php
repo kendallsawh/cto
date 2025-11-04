@@ -90,6 +90,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\PushSubscription', 'user_id', 'id');
     }
 
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
+
     /**
      * Get all PsipName records that belong to the same division.
      */
