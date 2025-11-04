@@ -6,7 +6,7 @@ use App\Http\Contollers\PermissionsController;
 use App\Http\Controllers\Auth\CompanyRegistrationController;
 use App\Http\Controllers\ProcessBuilderController;
 use App\Http\Controllers\ProcessFlowController;
-use App\Http\Controllers\Auth\CompanyRegistrationController;
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/register/company', [CompanyRegistrationController::class, 'create'])
