@@ -46,8 +46,18 @@
 @endif
 
 <!-- Display Error Messages 2 -->
-@if(session('error'))
+@if ($errors->any() || session('error'))
     <div class="alert alert-danger">
-        {{ session('error') }}
+        <ul class="mb-0">
+            {{-- Display the general session error, if it exists --}}
+            @if (session('error'))
+                <li>{{ session('error') }}</li>
+            @endif
+
+            {{-- List all validation errors --}}
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
 @endif
