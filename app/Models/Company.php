@@ -15,6 +15,7 @@ class Company extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'company_name',
         'representative_name',
         'address_lot_apt',
@@ -26,7 +27,7 @@ class Company extends Model
     ];
 
     /**
-     * Get the user that owns the company profile.
+     * Get the user that owns the company.
      */
     public function user()
     {

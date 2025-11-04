@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Contollers\RolesController;
 use App\Http\Contollers\PermissionsController;
+use App\Http\Controllers\Auth\CompanyRegistrationController;
 use App\Http\Controllers\ProcessBuilderController;
 use App\Http\Controllers\ProcessFlowController;
 use App\Http\Controllers\Auth\CompanyRegistrationController;
@@ -54,6 +55,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          */
         Route::get('/register', 'RegisterController@show')->name('register.show');
         Route::post('/register', 'RegisterController@register')->name('register.perform');
+
+        Route::get('/register/company', [CompanyRegistrationController::class, 'create'])
+            ->name('company.register');
+        Route::post('/register/company', [CompanyRegistrationController::class, 'store']);
 
         /**
          * Login Routes
