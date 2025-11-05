@@ -43,6 +43,7 @@ class CompanyRegistrationController extends Controller
             $userData = [
                 'name' => $validated['name'],
                 'email' => $validated['email'],
+                'username' => $validated['email'],
                 'password' => $validated['password'],
             ];
 
