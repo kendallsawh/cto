@@ -35,6 +35,7 @@ class CompanyRegistrationController extends Controller
             'address_street' => ['required', 'string', 'max:191'],
             'address_town' => ['required', 'string', 'max:191'],
             'vat_number' => ['nullable', 'string', 'max:191', 'unique:companies,vat_number'],
+            'tt_biz_id' => ['nullable', 'string', 'max:191'],
             'contact_business' => ['required', 'string', 'max:191'],
             'contact_mobile' => ['nullable', 'string', 'max:191'],
         ]);
@@ -59,6 +60,7 @@ class CompanyRegistrationController extends Controller
                 'address_street' => $validated['address_street'],
                 'address_town' => $validated['address_town'],
                 'vat_number' => $validated['vat_number'] ?? null,
+                'tt_biz_id' => $validated['tt_biz_id'] ?? null,
                 'contact_business' => $validated['contact_business'],
                 'contact_mobile' => $validated['contact_mobile'] ?? null,
             ];

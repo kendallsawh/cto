@@ -22,6 +22,7 @@ class Company extends Model
         'address_street',
         'address_town',
         'vat_number',
+        'tt_biz_id',
         'contact_business',
         'contact_mobile',
     ];

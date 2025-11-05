@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address_street', 191);
             $table->string('address_town', 191);
             $table->string('vat_number', 191)->nullable()->unique();
+            $table->string('tt_biz_id', 191)->nullable();
             $table->string('contact_business', 191);
             $table->string('contact_mobile', 191)->nullable();
             $table->timestamps();
