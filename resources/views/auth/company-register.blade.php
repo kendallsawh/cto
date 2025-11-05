@@ -69,6 +69,14 @@
                         <span class="text-danger small">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="col-12">
+                    <label for="tt_biz_id" class="form-label">TT-Biz ID <span class="text-muted small">(Optional)</span></label>
+                    <input type="text" class="form-control" id="tt_biz_id" name="tt_biz_id" value="{{ old('tt_biz_id') }}" placeholder="Enter your TT-Biz ID if applicable">
+                    <span class="form-text">Provide this only if your business has been issued a TT-Biz ID.</span>
+                    @error('tt_biz_id')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
+                </div>
 
                 <div class="col-12 pt-3">
                     <h2 class="h5 text-primary border-bottom pb-2">Address</h2>
