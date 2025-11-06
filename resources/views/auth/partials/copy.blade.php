@@ -1,1 +1,1 @@
-<p class="mt-5 mb-3 text-muted">&copy; MALF {{date('Y')}}</p>
+<p class="mt-5 mb-3 text-muted">&copy; MAF {{date('Y')}}</p>
