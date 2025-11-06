@@ -3,7 +3,7 @@
 @section('content')
     <div class="container py-5">
         @include('layouts.partials.messages')
-        <form method="post" action="{{ route('individual.register') }}" class="mx-auto shadow-lg bg-white p-4 p-md-5" style="max-width: 720px; border-radius: 12px;">
+        <form method="post" action="{{ route('individual.register') }}" class="mx-auto shadow-lg bg-white p-4 p-md-5 w-100" style="max-width: 960px; border-radius: 12px;">
             @csrf
 
             <div class="text-center mb-4">
@@ -45,7 +45,8 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="national_id" class="form-label">National ID <span class="text-muted small">(Provide at least one identification document)</span></label>
+                    <span class="text-muted small d-block mb-1">Provide at least one identification number</span>
+                    <label for="national_id" class="form-label">National ID</label>
                     <input type="text" class="form-control" id="national_id" name="national_id" value="{{ old('national_id') }}" placeholder="Enter your National ID">
                     @error('national_id')
                         <span class="text-danger small">{{ $message }}</span>
