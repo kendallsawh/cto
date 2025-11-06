@@ -8,7 +8,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class IndividualRegistrationController extends Controller
@@ -48,7 +47,7 @@ class IndividualRegistrationController extends Controller
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'username' => $validated['email'],
-                'password' => Hash::make($validated['password']),
+                'password' => $validated['password'],
             ]);
 
             $user->assignRole(5);
