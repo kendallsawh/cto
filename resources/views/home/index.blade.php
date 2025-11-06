@@ -146,28 +146,6 @@
 @endsection
 @section('content')
 @auth
-    @role('Subscriber|admin')
-    @include('home.subscriber')
-    @endrole
-
-    @role('Contributor|admin')
-    @include('home.contributor')
-    @endrole
-
-    @role('Author|admin')
-    @include('home.author')
-    @endrole
-
-
-
-    @role('Editor|admin')
-    @include('home.editor')
-    @endrole
-
-    @role('admin')
-    @include('home.admin')
-    @endrole
-
     <!--
         Subscriber: Can only manage their own profile. This is the role with the fewest permissions.
         Contributor: Can write and edit their own posts, but cannot publish them. They have no publishing or uploading capabilities.
@@ -175,6 +153,26 @@
         Editor: Can publish and manage posts for all users, upload media, and manage categories and tags.
         Administrator: Has full control over the entire site, including managing users, themes, plugins, settings, and more. They can create other administrators.
     -->
+    @role('Subscriber')
+    @include('home.subscriber')
+    @endrole
+
+    @role('Contributor')
+    @include('home.contributor')
+    @endrole
+
+    @role('Author') 
+    @include('home.author')
+    @endrole
+
+
+    @role('Editor') 
+    @include('home.editor')
+    @endrole
+
+    @role('admin')
+    @include('home.subscriber')
+    @endrole
 
 @endauth
 @guest
