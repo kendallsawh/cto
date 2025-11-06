@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Contollers\RolesController;
 use App\Http\Contollers\PermissionsController;
 use App\Http\Controllers\Auth\CompanyRegistrationController;
+use App\Http\Controllers\Auth\IndividualRegistrationController;
 use App\Http\Controllers\ProcessBuilderController;
 use App\Http\Controllers\ProcessFlowController;
 
@@ -12,6 +13,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/register/company', [CompanyRegistrationController::class, 'create'])
         ->name('company.register');
     Route::post('/register/company', [CompanyRegistrationController::class, 'store']);
+    Route::get('/register/individual', [IndividualRegistrationController::class, 'create'])
+        ->name('individual.register');
+    Route::post('/register/individual', [IndividualRegistrationController::class, 'store']);
 });
 
 /*
@@ -59,6 +63,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/register/company', [CompanyRegistrationController::class, 'create'])
             ->name('company.register');
         Route::post('/register/company', [CompanyRegistrationController::class, 'store']);
+        Route::get('/register/individual', [IndividualRegistrationController::class, 'create'])
+            ->name('individual.register');
+        Route::post('/register/individual', [IndividualRegistrationController::class, 'store']);
 
         /**
          * Login Routes
