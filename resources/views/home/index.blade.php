@@ -47,6 +47,18 @@
         color: #17a2b8;
     }
 
+    .outline-danger {
+        border-color: #dc3545; /* Bootstrap red tone */
+    }
+
+    .outline-danger a {
+        color: #dc3545;
+    }
+
+    .outline-danger:hover {
+        background-color: rgba(220, 53, 69, 0.1); /* subtle red tint on hover */
+    }
+
     /* Outline warning style */
     .outline-warning {
         border: 1px solid #ffc107; /* Warning color */
@@ -161,12 +173,12 @@
     @include('home.contributor')
     @endrole
 
-    @role('Author') 
+    @role('Author')
     @include('home.author')
     @endrole
 
 
-    @role('Editor') 
+    @role('Editor')
     @include('home.editor')
     @endrole
 

@@ -37,7 +37,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Division 1</td>
+                                <td>RAN</td>
                                 <td>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">Consession 1</li>
@@ -47,7 +47,7 @@
                                 </td>
                                 <td>
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><span class="badge bg-danger">Active</span></li>
+                                        <li class="list-group-item"><span class="badge bg-warning">Pending</span></li>
                                         <li class="list-group-item"><span class="badge bg-success">Active</span></li>
                                         <li class="list-group-item"><span class="badge bg-success">Active</span></li>
                                     </ul>
@@ -55,41 +55,64 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Division 2</td>
+                                <td>RAS</td>
+                                <td>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Consession 10</li>
+                                        <li class="list-group-item">Consession 11</li>
+                                        <li class="list-group-item">Consession 12</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><span class="badge bg-success">Active</span></li>
+                                        <li class="list-group-item"><span class="badge bg-warning">Pending</span></li>
+                                        <li class="list-group-item"><span class="badge bg-danger">DNQ</span></li>
+                                    </ul>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>APH</td>
                                 <td>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">Consession 4</li>
                                         <li class="list-group-item">Consession 5</li>
                                         <li class="list-group-item">Consession 6</li>
+                                        <li class="list-group-item">Consession 15</li>
                                     </ul>
                                 </td>
                                 <td>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><span class="badge bg-success">Active</span></li>
-                                        <li class="list-group-item"><span class="badge bg-danger">Active</span></li>
-                                        <li class="list-group-item"><span class="badge bg-danger">Inactive</span></li>
+                                        <li class="list-group-item"><span class="badge bg-warning">Pending</span></li>
+                                        <li class="list-group-item"><span class="badge bg-danger">DNQ</span></li>
+                                        <li class="list-group-item"><span class="badge bg-info">Action Needed</span></li>
                                     </ul>
 
                                 </td>
                             </tr>
                             <tr>
-                                <td>Division 3</td>
+                                <td>ASD</td>
                                 <td>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">Consession 7</li>
                                         <li class="list-group-item">Consession 8</li>
                                         <li class="list-group-item">Consession 9</li>
+                                        <li class="list-group-item">Consession 14</li>
                                     </ul>
                                 </td>
                                 <td>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><span class="badge bg-success">Active</span></li>
-                                        <li class="list-group-item"><span class="badge bg-danger">Active</span></li>
-                                        <li class="list-group-item"><span class="badge bg-danger">Inactive</span></li>
+                                        <li class="list-group-item"><span class="badge bg-warning">Pending</span></li>
+                                        <li class="list-group-item"><span class="badge bg-danger">DNQ</span></li>
+                                        <li class="list-group-item"><span class="badge bg-info">Action Needed</span></li>
                                     </ul>
 
                                 </td>
                             </tr>
+
                         </tbody>
                     </table>
 
@@ -111,19 +134,36 @@
                             <tbody>
                                 <tr>
                                     <td class="">
-                                        <span class="badge rounded-pill stacked-badge outline-primary mb-2">
-                                            <a href="#" class=" text-decoration-none">CF</a>
+                                        <span class="badge rounded-pill stacked-badge outline-success mb-2">
+                                            <a href="#" class="text-success text-decoration-none">Active</a>
                                         </span>
                                     </td>
-                                    <td class="text-decoration-dull">-Consolidated Consession</td>
+                                    <td class="text-decoration-dull">-Active</td>
                                 </tr>
                                 <tr>
                                     <td class="">
-                                        <span class="badge rounded-pill stacked-badge outline-success mb-2">
-                                            <a href="#" class="text-success text-decoration-none">IDF</a>
+                                        <span class="badge rounded-pill stacked-badge outline-info mb-2">
+                                            <a href="#" class=" text-decoration-none">Action Needed</a>
                                         </span>
                                     </td>
-                                    <td class="text-decoration-dull">-Infrastructure Development Consession</td>
+                                    <td class="text-decoration-dull">-Action Needed</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="">
+                                        <span class="badge rounded-pill stacked-badge outline-warning mb-2">
+                                            <a href="#" class=" text-decoration-none">Pending</a>
+                                        </span>
+                                    </td>
+                                    <td class="text-decoration-dull">-Pending</td>
+                                </tr>
+                                <tr>
+                                    <td class="">
+                                        <span class="badge rounded-pill stacked-badge outline-danger mb-2">
+                                            <a href="#" class=" text-decoration-none">DNQ</a>
+                                        </span>
+                                    </td>
+                                    <td class="text-decoration-dull">-Did Not Qualify</td>
                                 </tr>
                             </tbody>
                         </table>
