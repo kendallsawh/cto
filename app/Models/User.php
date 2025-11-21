@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,10 +11,11 @@ use App\Models\PsipName;
 use App\Models\Division;
 use App\Models\Company;
 use App\Models\Individual;
+use App\Support\Auth\HasRolesCompat;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRolesCompat;
 
     /**
      * The database table used by the model.
