@@ -4,19 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Item extends Model
 {
     use HasFactory;
-    public function fundType()
+
+    protected $fillable = [
+        'item_category_id',
+        'name',
+        'default_unit_id',
+        'metadata',
+    ];
+
+    protected $casts = [
+        'metadata' => 'array',
+    ];
+
+    /**
+     * Category of the item.
+     */
+    public function category(): BelongsTo
     {
-        return $this->belongsTo('App\Models\FundType', 'fund_types_id', 'id');
+        return $this->belongsTo(ItemCategory::class, 'item_category_id');
     }
 
-    public function subitems()
+    /**
+     * Default measurement unit for this item.
+     */
+    public function defaultUnit(): BelongsTo
     {
-        return $this->hasMany('App\Models\Subitem', 'items_id', 'id');
+        return $this->belongsTo(MeasurementUnit::class, 'default_unit_id');
     }
-
-
 }

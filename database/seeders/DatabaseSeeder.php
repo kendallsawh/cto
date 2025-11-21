@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        if (App::environment(['local', 'testing'])) {
+            $this->call([
+                ConcessionStatusSeeder::class,
+                MeasurementUnitSeeder::class,
+                ItemCategorySeeder::class,
+                ItemsSeeder::class,
+                ConcessionsDemoSeeder::class,
+            ]);
+        }
     }
 }
